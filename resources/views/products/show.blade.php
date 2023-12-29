@@ -10,7 +10,7 @@
             <strong>Price:</strong> {{ $product->price }}
         </div>
         <strong class="mb-4 dark:text-white">Product Image:</strong>
-        <div class="max-w-sm dark:text-white">
+        <div class="mb-4 max-w-sm dark:text-white">
 
             @if($product->image)
                 <img src="{{ asset('storage/product_images/' . $product->image) }}" alt="Product Image">
