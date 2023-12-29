@@ -1,10 +1,6 @@
-<!-- resources/views/products/edit.blade.php -->
-
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
     <div class="container mx-auto mt-8">
-        <h2 class="text-3xl font-semibold mb-4">Edit Product</h2>
+        <h2 class="text-3xl font-semibold mb-4 dark:text-white">Edit Product</h2>
 
         <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -47,4 +43,4 @@
             </div>
         </form>
     </div>
-@endsection
+</x-app-layout>

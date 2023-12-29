@@ -85,7 +85,7 @@ class ProductController extends Controller
             ]);
         }
 
-        return redirect()->route('products.show', $product->id)->with('success', 'Product updated successfully.');
+        return redirect()->route('products.index', $product->id)->with('success', 'Product updated successfully.');
     }
 
 

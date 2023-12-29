@@ -1,8 +1,8 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
+
 
 <div class="container mx-auto mt-8">
-    <h2 class="text-3xl font-semibold mb-4">Product List</h2>
+    <h2 class="text-3xl font-semibold mb-4 dark:text-white">Product List</h2>
 
     @if(session('success'))
         <div class="bg-green-200 text-green-800 p-4 mb-4 rounded">
@@ -31,7 +31,8 @@
                         <td class="py-2 px-4 border-b">
                             <a href="{{ route('products.show', $product->id) }}" class="text-blue-500 mr-2">View</a>
                             <a href="{{ route('products.edit', $product->id) }}" class="text-yellow-500 mr-2">Edit</a>
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="inline-block">
+                            <form class="inline-block" action="{{ route('products.destroy', $product->id) }}" method="POST"
+                                onsubmit="return confirm('{{ __('Are you sure?') }}');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500">Delete</button>
@@ -46,4 +47,4 @@
     @endif
 </div>
 
-@endsection
+</x-app-layout>

@@ -1,10 +1,10 @@
 <!-- resources/views/products/create.blade.php -->
 
-@extends('layouts.app')
+<x-app-layout>
 
-@section('content')
+
     <div class="container mx-auto mt-8">
-        <h2 class="text-3xl font-semibold mb-4">Create Product</h2>
+        <h2 class="text-3xl font-semibold mb-4 dark:text-white">Create Product</h2>
 
         <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -46,4 +46,5 @@
             </div>
         </form>
     </div>
-@endsection
+
+</x-app-layout>
