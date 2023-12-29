@@ -16,7 +16,7 @@
 
             <div class="mb-4">
                 <label for="price" class="block text-sm font-medium text-gray-600">Price</label>
-                <input type="number" name="price" id="price" value="{{ old('price', $product->price) }}" class="mt-1 p-2 w-full border rounded-md">
+                <input type="number" step="0.01" name="price" id="price" value="{{ old('price', $product->price) }}" class="mt-1 p-2 w-full border rounded-md">
                 @error('price')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
