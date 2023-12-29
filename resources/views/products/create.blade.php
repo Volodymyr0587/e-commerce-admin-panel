@@ -18,6 +18,22 @@
             </div>
 
             <div class="mb-4">
+                <label for="category_id" class="block text-sm font-medium text-gray-600">Category</label>
+                <select name="category_id" id="category_id" class="mt-1 p-2 w-full border rounded-md">
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="subcategory_id" class="block text-sm font-medium text-gray-600">Subcategory</label>
+                <select name="subcategory_id" id="subcategory_id" class="mt-1 p-2 w-full border rounded-md">
+
+                </select>
+            </div>
+
+            <div class="mb-4">
                 <label for="price" class="block text-sm font-medium text-gray-600">Price</label>
                 <input type="number" step="0.01" name="price" id="price" value="{{ old('price') }}" class="mt-1 p-2 w-full border rounded-md">
                 @error('price')
@@ -48,3 +64,4 @@
     </div>
 
 </x-app-layout>
+
