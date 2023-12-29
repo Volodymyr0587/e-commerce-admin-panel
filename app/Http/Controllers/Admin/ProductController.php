@@ -27,7 +27,7 @@ class ProductController extends Controller
         $rules = [
             'name' => 'required|unique:products|min:2|max:255',
             'price' => 'required|numeric|min:0',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'product_detail' => 'required|string',
         ];
 
@@ -38,10 +38,62 @@ class ProductController extends Controller
         $product = Product::create([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
-            'image' => $request->file('image')->store('product_images', 'product_images'), // 'product_images' disk configured in filesystem.php
             'product_detail' => $request->input('product_detail'),
         ]);
 
+        if ($request->hasFile('image')) {
+            $product->update([
+                'image' => $request->file('image')->store('product_images', 'product_images'), // 'product_images' disk configured in filesystem.php
+
+            ]);
+        }
+
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
+
+    public function edit(Product $product)
+    {
+        return view('products.edit', compact('product'));
+    }
+
+    public function show(Product $product)
+    {
+        return view('products.show', compact('product'));
+    }
+
+
+    public function update(Request $request, Product $product)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'product_detail' => 'required|string',
+        ]);
+
+        // Update product details
+        $product->update([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'product_detail' => $request->input('product_detail'),
+        ]);
+
+        // Update product image if provided
+        if ($request->hasFile('image')) {
+            $product->update([
+                'image' => $request->file('image')->store('product_images', 'public'),
+            ]);
+        }
+
+        return redirect()->route('products.show', $product->id)->with('success', 'Product updated successfully.');
+    }
+
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+    }
+
 }

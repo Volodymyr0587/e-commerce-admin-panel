@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,8 +29,27 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['admin', 'auth'])->group(function () {
-    Route::get('/index', []);
+Route::middleware(['auth', 'admin'])->prefix('products')->group(function () {
+    // Display a form to create a new product
+    Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+
+    // Store a new product in the database
+    Route::post('/store', [ProductController::class, 'store'])->name('products.store');
+
+    // Display a list of products
+    Route::get('/index', [ProductController::class, 'index'])->name('products.index');
+
+    // Display a specific product
+    Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
+
+    // Display a form to edit a specific product
+    Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+
+    // Update a specific product in the database
+    Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
+
+    // Delete a specific product from the database
+    Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
 
 require __DIR__.'/auth.php';
