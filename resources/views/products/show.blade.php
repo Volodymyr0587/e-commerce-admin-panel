@@ -13,7 +13,7 @@
         <div class="max-w-sm dark:text-white">
 
             @if($product->image)
-                <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image">
+                <img src="{{ asset('storage/product_images/' . $product->image) }}" alt="Product Image">
             @else
                 <img src="{{ asset('default-images/no-image.png') }}" alt="Default Image">
             @endif

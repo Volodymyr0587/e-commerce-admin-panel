@@ -81,7 +81,7 @@ class ProductController extends Controller
         // Update product image if provided
         if ($request->hasFile('image')) {
             $product->update([
-                'image' => $request->file('image')->store('product_images', 'public'),
+                'image' => $request->file('image')->store('product_images', 'product_images'),
             ]);
         }
 
