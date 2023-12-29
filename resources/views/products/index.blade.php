@@ -4,11 +4,12 @@
 <div class="container mx-auto mt-8">
     <h2 class="text-3xl font-semibold mb-4 dark:text-white">Product List</h2>
 
-    @if(session('success'))
+    {{-- @if(session('success'))
         <div class="bg-green-200 text-green-800 p-4 mb-4 rounded">
             {{ session('success') }}
         </div>
-    @endif
+    @endif --}}
+    <x-flash-message />
 
     <a href="{{ route('products.create') }}" class="bg-blue-500 text-white py-2 px-4 rounded mb-4 inline-block">Add Product</a>
 
