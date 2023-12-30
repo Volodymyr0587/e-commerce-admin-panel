@@ -18,7 +18,7 @@
             <div class="mb-4">
                 <label for="category_id" class="block text-sm font-medium text-gray-600">Category</label>
                 <select name="category_id" id="category_id" class="mt-1 p-2 w-full border rounded-md">
-                    <option>--Category--</option>
+                    {{-- <option>--Category--</option> --}}
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
@@ -31,7 +31,7 @@
             <div class="mb-4">
                 <label for="subcategory_id" class="block text-sm font-medium text-gray-600">Subcategory</label>
                 <select name="subcategory_id" id="subcategory_id" class="getSubcategories mt-1 p-2 w-full border rounded-md">
-                    <option>--SubCategory--</option>
+                    {{-- <option>--SubCategory--</option> --}}
                 </select>
                 @error('subcategory_id')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

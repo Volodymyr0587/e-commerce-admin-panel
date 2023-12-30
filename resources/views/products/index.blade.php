@@ -12,6 +12,8 @@
     <x-flash-message />
 
     <a href="{{ route('products.create') }}" class="bg-blue-500 text-white py-2 px-4 rounded mb-4 inline-block">Add Product</a>
+    {{-- <a href="{{ route('categories.index') }}" class="bg-blue-500 text-white py-2 px-4 rounded mb-4 inline-block">Add Category</a> --}}
+
 
     @if($products->count() > 0)
         <table class="min-w-full bg-white border border-gray-300">

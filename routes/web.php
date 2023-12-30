@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->prefix('products')->group(function () {
+
+    // Route::resource('subcategories', SubcategoryController::class);
     // Display a form to create a new product
     Route::get('/create', [ProductController::class, 'create'])->name('products.create');
 
@@ -52,6 +56,30 @@ Route::middleware(['auth', 'admin'])->prefix('products')->group(function () {
 
     // Delete a specific product from the database
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+});
+
+
+Route::middleware(['auth', 'admin'])->prefix('categories')->group(function () {
+
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/{category}', [CategoryController::class, 'show'])->name('categories.show');
+    Route::get('/{category}/categories/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+});
+
+
+Route::middleware(['auth', 'admin'])->prefix('subcategories')->group(function () {
+
+    Route::get('/', [SubcategoryController::class, 'index'])->name('subcategories.index');
+    Route::get('/create', [SubcategoryController::class, 'create'])->name('subcategories.create');
+    Route::post('/store', [SubcategoryController::class, 'store'])->name('subcategories.store');
+    // Route::get('/{subcategory}', [SubcategoryController::class, 'show'])->name('subcategories.show');
+    Route::get('/edit/{subcategory}', [SubcategoryController::class, 'edit'])->name('subcategories.edit');
+    Route::put('/{subcategory}', [SubcategoryController::class, 'update'])->name('subcategories.update');
+    Route::delete('/{subcategory}', [SubcategoryController::class, 'destroy'])->name('subcategories.destroy');
 });
 
 require __DIR__.'/auth.php';

@@ -53,8 +53,8 @@ class ProductController extends Controller
             'name' => $request->input('name'),
             'price' => $request->input('price'),
             'product_detail' => $request->input('product_detail'),
-            'category_id' => $request->input('category_id'),
-            'subcategory_id' => $request->input('subcategory_id'),
+            'category_id' => $request->input('category_id') ?? Null,
+            'subcategory_id' => $request->input('subcategory_id') ?? Null,
         ]);
 
         if ($request->hasFile('image')) {
