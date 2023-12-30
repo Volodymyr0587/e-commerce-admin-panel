@@ -33,7 +33,7 @@ Route::middleware(['auth', 'admin'])->prefix('products')->group(function () {
     // Display a form to create a new product
     Route::get('/create', [ProductController::class, 'create'])->name('products.create');
 
-    Route::get('/get-subcategories', [ProductController::class, 'getSubcategories'])->name('getSubcategories');
+    Route::post('/getSubCategories', [ProductController::class, 'getSubCategories'])->name('getSubcategories');
 
     // Store a new product in the database
     Route::post('/store', [ProductController::class, 'store'])->name('products.store');

@@ -1,5 +1,3 @@
-<!-- resources/views/products/create.blade.php -->
-
 <x-app-layout>
 
 
@@ -24,13 +22,19 @@
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
+                @error('category_id')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="mb-4">
                 <label for="subcategory_id" class="block text-sm font-medium text-gray-600">Subcategory</label>
-                <select name="subcategory_id" id="subcategory_id" class="mt-1 p-2 w-full border rounded-md">
-
+                <select name="subcategory_id" id="subcategory_id" class="getSubcategories mt-1 p-2 w-full border rounded-md">
+                    <option>--SubCategory--</option>
                 </select>
+                @error('subcategory_id')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="mb-4">
@@ -65,3 +69,37 @@
 
 </x-app-layout>
 
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+<script>
+    $(document).ready(function(){
+            $(document).on('change','#category_id', function() {
+                let category = $(this).val();
+                $('#subcategory_id').show();
+                $.ajax({
+                    method: 'post',
+                    url: "{{ route('getSubcategories') }}",
+                    data: {
+                        category_id: category
+                    },
+                    success: function(res) {
+                        console.log(res);
+                        if (res.status == 'success') {
+                            let all_options = "<option value=''>Select Sub Category</option>";
+                            let all_subcategories = res.subCategories;
+                            $.each(all_subcategories, function(index, value) {
+                                all_options += "<option value='" + value.id +
+                                    "'>" + value.name + "</option>";
+                            });
+                            $(".getSubcategories").html(all_options);
+                        }
+                    }
+                })
+            });
+        });
+    </script>

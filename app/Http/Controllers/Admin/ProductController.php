@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -21,6 +22,17 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         return view('products.create', compact('categories'));
+    }
+
+    public function getSubCategories(Request $request)
+    {
+        $categoryId = $request->category_id;
+        $subCategories = Subcategory::where('category_id', $categoryId)->get();
+
+        return response()->json([
+            'status' => 'success',
+            'subCategories' => $subCategories
+        ]);
     }
 
     public function store(Request $request)
