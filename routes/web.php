@@ -74,7 +74,7 @@ Route::middleware(['auth', 'admin'])->prefix('categories')->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('subcategories')->group(function () {
 
     Route::get('/', [SubcategoryController::class, 'index'])->name('subcategories.index');
-    Route::get('/create', [SubcategoryController::class, 'create'])->name('subcategories.create');
+    Route::get('/create/{category_id}', [SubcategoryController::class, 'create'])->name('subcategories.create');
     Route::post('/store', [SubcategoryController::class, 'store'])->name('subcategories.store');
     // Route::get('/{subcategory}', [SubcategoryController::class, 'show'])->name('subcategories.show');
     Route::get('/edit/{subcategory}', [SubcategoryController::class, 'edit'])->name('subcategories.edit');

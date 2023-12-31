@@ -16,11 +16,12 @@ class SubcategoryController extends Controller
         return view('subcategories.index', compact('subcategories', 'categories'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $categories = Category::all();
+        $categoryId = $request->route('category_id');
 
-        return view('subcategories.create', compact('categories'));
+        return view('subcategories.create', compact('categories', 'categoryId'));
     }
 
     public function store(Request $request)

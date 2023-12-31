@@ -2,7 +2,7 @@
 
 
     <div class="container mx-auto mt-8">
-        <h2 class="text-3xl font-semibold mb-4 dark:text-white">Add Subategory for: </h2>
+        <h2 class="text-3xl font-semibold mb-4 dark:text-white">Add Subategory for {{ $categories->pluck('name', 'id')[$categoryId] }}: </h2>
 
         <form action="{{ route('subcategories.store') }}" method="POST">
             @csrf
@@ -11,7 +11,9 @@
                 <label for="category_id" class="block text-sm font-medium text-gray-600">Category</label>
                 <select name="category_id" class="mt-1 p-2 w-1/2 border rounded-md">
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}" {{ ($categoryId && $category->id == $categoryId) ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
                     @endforeach
                 </select>
                 @error('category_id')
