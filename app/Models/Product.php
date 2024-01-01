@@ -18,6 +18,11 @@ class Product extends Model
         'subcategory_id',
     ];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 
     protected static function boot()
     {
